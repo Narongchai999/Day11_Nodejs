@@ -11,7 +11,7 @@ app.use(express.json());//ให้ยอมรับjson
 app.use(express.urlencoded({ extended: true}));
 
 const db = require('./app/models');
-db.sequelize.sync({force:false}).then(()=>{
+db.sequelize.sync({force:false}).then(()=>{//เปลี่ยนเป็น true เป็นการลบข้อมูลใน database ทั้งหมด
     console.log('Database is syncing...');//แสดงผล
 });
 
@@ -48,6 +48,8 @@ app.get('/', (req,res)=>{
 //});
 
 require("./app/routes/employee.route")(app);
+require("./app/routes/company.route")(app);
+require("./app/routes/project.route")(app);
 
 app.listen(PORT, ()=>{//ทำให้แสดงในหน้าเว็บได้ node server.js ในcmd เพื่อในserver run
     console.log(`Server is runing on port ${PORT}`); //ใช้``เพื่อให้เขียนตัวแปรในข้อความได้แต่ต้องครอบด้วย ${}
